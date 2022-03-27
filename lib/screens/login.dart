@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nda_18dh110793/constants/colors.dart';
 import 'package:nda_18dh110793/helpers/validate.dart';
+import 'package:nda_18dh110793/screens/home_page/home.dart';
 import 'package:nda_18dh110793/screens/signup.dart';
 import 'package:nda_18dh110793/widgets/Input.dart';
 import 'package:nda_18dh110793/widgets/SocialIcon.dart';
@@ -15,6 +16,11 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
+  onLogin() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {}
+                            onLogin();
                           },
                           child: Text("Continue"),
                           style: ElevatedButton.styleFrom(

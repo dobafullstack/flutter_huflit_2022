@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class Input extends StatefulWidget {
   String? hintText;
+  TextEditingController? controller;
   IconData? prefixIcon;
   IconData? suffixIcon;
   bool password;
@@ -12,6 +13,7 @@ class Input extends StatefulWidget {
       this.prefixIcon,
       this.suffixIcon,
       this.validator,
+      this.controller,
       this.password = false});
 
   @override
@@ -24,6 +26,7 @@ class _InputState extends State<Input> {
     return TextFormField(
       validator: widget.validator,
       obscureText: widget.password,
+      controller: widget.controller,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 25),
           hintText: widget.hintText,
