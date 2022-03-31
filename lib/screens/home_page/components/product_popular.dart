@@ -38,8 +38,9 @@ class _ProductPopularState extends State<ProductPopular> {
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 10,
             mainAxisSpacing: 10,
+            childAspectRatio: 0.75,
+            crossAxisSpacing: 10
           ),
           itemBuilder: (context, index) =>
               ProductItem(product: products[index]),

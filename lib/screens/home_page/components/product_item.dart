@@ -9,11 +9,10 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.only(bottom: 16),
           width: double.infinity,
           child: Image(
             image: AssetImage(
@@ -25,7 +24,7 @@ class ProductItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            // Expanded(child: Text(product.title)),
+            Expanded(child: Text(product.title)),
             Container(
                 padding: EdgeInsets.all(2),
                 decoration: BoxDecoration(
@@ -39,10 +38,6 @@ class ProductItem extends StatelessWidget {
                 )),
           ],
         ),
-        Positioned(
-          child: Text(product.title),
-          bottom: 0,
-        )
       ],
     );
   }
