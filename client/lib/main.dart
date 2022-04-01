@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nda_18dh110793/constants/colors.dart';
 
 import 'screens/home_page/home.dart';
 import 'screens/splash.dart';
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: MyColors.MATERIAL_PRIMARY_COLOR,
       ),
-      home: HomePage(),
+      home: SplashPage(),
     );
   }
 }

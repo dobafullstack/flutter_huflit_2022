@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nda_18dh110793/screens/cart_page/cart.dart';
 
 import '../../../widgets/Input.dart';
 
@@ -21,10 +22,16 @@ class _HomeHeaderState extends State<HomeHeader> {
           ),
         ),
         Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
-        Container(
-          padding: EdgeInsets.all(16),
-          child: Icon(Icons.shopping_cart_outlined),
-          color: Color.fromARGB(33, 158, 158, 158),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => CartPage()));
+          },
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Icon(Icons.shopping_cart_outlined),
+            color: Color.fromARGB(33, 158, 158, 158),
+          ),
         )
       ],
     );
