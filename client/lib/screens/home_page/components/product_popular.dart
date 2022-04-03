@@ -39,7 +39,7 @@ class _ProductPopularState extends State<ProductPopular> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.75,
+            childAspectRatio: 0.65,
             crossAxisSpacing: 10
           ),
           itemBuilder: (context, index) =>
