@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nda_18dh110793/constants/colors.dart';
-import 'package:nda_18dh110793/helpers/user_share_reference.dart';
+import 'package:nda_18dh110793/helpers/custom_share_reference.dart';
 import 'package:nda_18dh110793/helpers/validate.dart';
 import 'package:nda_18dh110793/widgets/Input.dart';
 
@@ -17,13 +17,24 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    UserShareReference.init();
+  }
+
+  onSignUp() async {
+    if (_formKey.currentState!.validate()) {
+      await CustomShareReference.setTextField(
+          CustomShareReference.keyUsername, usernameController);
+      await CustomShareReference.setTextField(
+          CustomShareReference.keyPassword, passwordController);
+
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -95,25 +106,24 @@ class _SignUpPageState extends State<SignUpPage> {
                         suffixIcon: Icons.lock,
                         password: true,
                         validator: (value) {
+                          if (passwordController.text !=
+                              confirmPasswordController.text) {
+                            return "Invalid confirm password";
+                          }
+
                           return ValidateInput.validatePassword(value);
                         },
                         controller: confirmPasswordController,
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 20)),
                       ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            await UserShareReference.setUsername(usernameController.text);
-                            await UserShareReference.setPassword(passwordController.text);
-
-                            Navigator.pop(context);
-                          }
-                        },
+                        onPressed: onSignUp,
                         child: Text("Continue"),
                         style: ElevatedButton.styleFrom(
                           minimumSize: Size(double.infinity, 60),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12), // <-- Radius
+                            borderRadius:
+                                BorderRadius.circular(12), // <-- Radius
                           ),
                         ),
                       ),

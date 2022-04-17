@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nda_18dh110793/screens/login.dart';
 
 import '../constants/colors.dart';
+import '../helpers/custom_share_reference.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key? key}) : super(key: key);
@@ -15,7 +16,10 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    CustomShareReference.init();
     _navigateToHome();
+    
   }
 
   _navigateToHome() async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nda_18dh110793/constants/colors.dart';
-import 'package:nda_18dh110793/helpers/user_share_reference.dart';
+import 'package:nda_18dh110793/helpers/custom_share_reference.dart';
 import 'package:nda_18dh110793/helpers/validate.dart';
 import 'package:nda_18dh110793/screens/home_page/home.dart';
 import 'package:nda_18dh110793/screens/signup.dart';
@@ -21,16 +21,24 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   onLogin() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    usernameController.text =
+        CustomShareReference.get(CustomShareReference.keyUsername) ?? "";
+    passwordController.text =
+        CustomShareReference.get(CustomShareReference.keyPassword) ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
-    usernameController.text = UserShareReference.getUsername() ?? "";
-    passwordController.text = UserShareReference.getPassword() ?? "";
-
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -143,9 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SignUpPage()));
-                          setState(() {
-
-                          });
+                          setState(() {});
                         },
                         child: Text(
                           "Sign up",

@@ -6,6 +6,8 @@ class Input extends StatefulWidget {
   IconData? prefixIcon;
   IconData? suffixIcon;
   bool password;
+  bool readyOnly;
+  TextInputType type;
   String? Function(String?)? validator;
 
   Input(
@@ -14,7 +16,9 @@ class Input extends StatefulWidget {
       this.suffixIcon,
       this.validator,
       this.controller,
-      this.password = false});
+      this.readyOnly = false,
+      this.password = false,
+      this.type = TextInputType.text});
 
   @override
   State<Input> createState() => _InputState();
@@ -27,6 +31,8 @@ class _InputState extends State<Input> {
       validator: widget.validator,
       obscureText: widget.password,
       controller: widget.controller,
+      readOnly: widget.readyOnly,
+      keyboardType: widget.type,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 25),
           hintText: widget.hintText,
