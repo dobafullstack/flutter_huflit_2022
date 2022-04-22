@@ -24,8 +24,7 @@ class _HomeHeaderState extends State<HomeHeader> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => CartPage()));
+            Navigator.pushNamed(context, "/cart");
           },
           child: Container(
             padding: EdgeInsets.all(16),

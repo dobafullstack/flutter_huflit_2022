@@ -4,14 +4,14 @@ import 'package:nda_18dh110793/models/product.dart';
 import '../constants/colors.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  Product product;
-
-  ProductDetailPage({required this.product});
+  ProductDetailPage();
 
   @override
   Widget build(BuildContext context) {
+    final product = ModalRoute.of(context)!.settings.arguments as Product;
+
     return Scaffold(
-      appBar: Navbar(context),
+      appBar: Navbar(context, product.title),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,7 +24,7 @@ class ProductDetailPage extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 30),
             child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -35,11 +35,11 @@ class ProductDetailPage extends StatelessWidget {
     );
   }
 
-  AppBar Navbar(BuildContext context) {
+  AppBar Navbar(BuildContext context, String title) {
     return AppBar(
       elevation: 0,
       backgroundColor: MyColors.PRIMARY_COLOR,
-      title: Text("Details"),
+      title: Text(title),
     );
   }
 }

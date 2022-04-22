@@ -16,37 +16,18 @@ class _ProductPopularState extends State<ProductPopular> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Popular Products",
-              style: TextStyle(
-                  color: MyColors.PRIMARY_COLOR, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "See more",
-              style: TextStyle(color: MyColors.PRIMARY_COLOR),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 16)),
-        GridView.builder(
-          // physics: ScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverGrid(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             mainAxisSpacing: 10,
             childAspectRatio: 0.65,
-            crossAxisSpacing: 10
-          ),
-          itemBuilder: (context, index) =>
-              ProductItem(product: products[index]),
-          itemCount: products.length,
-        )
-      ],
+            crossAxisSpacing: 10),
+        delegate: SliverChildBuilderDelegate(
+            (context, index) => ProductItem(product: products[index]),
+            childCount: products.length),
+      ),
     );
   }
 }

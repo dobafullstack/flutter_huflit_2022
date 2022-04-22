@@ -12,10 +12,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ProductDetailPage(product: product)));
+        Navigator.pushNamed(context, "/product-detail", arguments: product);
       },
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,

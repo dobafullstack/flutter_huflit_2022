@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/colors.dart';
+
 class NotificationFragment extends StatefulWidget {
   NotificationFragment({Key? key}) : super(key: key);
 
@@ -10,6 +12,18 @@ class NotificationFragment extends StatefulWidget {
 class _NotificationFragmentState extends State<NotificationFragment> {
   @override
   Widget build(BuildContext context) {
-    return Text("Notification");
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          elevation: 0,
+          backgroundColor: MyColors.PRIMARY_COLOR,
+          title: Text("Notification"),
+          leading: Container(),
+        ),
+        SliverToBoxAdapter(
+          child: Text("Notification"),
+        )
+      ],
+    );
   }
 }

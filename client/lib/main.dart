@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nda_18dh110793/constants/colors.dart';
+import 'package:nda_18dh110793/routes.dart';
 
 import 'screens/home_page/home.dart';
 import 'screens/splash.dart';
@@ -17,9 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      routes: routes,
+      initialRoute: "/",
       theme: ThemeData(
-        primarySwatch: MyColors.MATERIAL_PRIMARY_COLOR,
-      ),
+          primarySwatch: MyColors.MATERIAL_PRIMARY_COLOR,
+          appBarTheme:
+              AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light)),
       home: SplashPage(),
     );
   }

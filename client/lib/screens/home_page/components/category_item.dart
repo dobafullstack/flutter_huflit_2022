@@ -9,11 +9,15 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 150,
-      padding: EdgeInsets.all(5),
-      child: Image(image: AssetImage(category.image)),
+    return GestureDetector(
+      onTap: () =>
+          Navigator.pushNamed(context, "/category-detail", arguments: category),
+      child: Container(
+        width: 150,
+        height: 150,
+        padding: EdgeInsets.all(5),
+        child: Image(image: AssetImage(category.image)),
+      ),
     );
   }
 }

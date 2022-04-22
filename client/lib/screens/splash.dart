@@ -19,14 +19,12 @@ class _SplashPageState extends State<SplashPage> {
 
     CustomShareReference.init();
     _navigateToHome();
-    
   }
 
   _navigateToHome() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
 
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginPage()));
+    Navigator.pushReplacementNamed(context, "/login");
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nda_18dh110793/constants/colors.dart';
 import 'package:nda_18dh110793/helpers/custom_share_reference.dart';
 import 'package:nda_18dh110793/helpers/validate.dart';
@@ -20,12 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   onSignUp() async {
     if (_formKey.currentState!.validate()) {
       await CustomShareReference.setTextField(
@@ -39,12 +34,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
         title: Text("Sign Up"),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: MyColors.PRIMARY_COLOR),
@@ -55,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.only(top: 100),
+          margin: EdgeInsets.only(top: 200),
           padding: EdgeInsets.symmetric(horizontal: 16),
           width: double.infinity,
           child: Column(
@@ -142,6 +137,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    ));
+    );
   }
 }

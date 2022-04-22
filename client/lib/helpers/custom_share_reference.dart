@@ -17,7 +17,7 @@ class CustomShareReference {
     await _sharePreference?.setString(key, value);
   }
 
-  static String? get(String key) => _sharePreference?.getString(key);
+  static String get(String key) => _sharePreference?.getString(key) ?? "";
 
   static Future setTextField(
       String key, TextEditingController controller) async {

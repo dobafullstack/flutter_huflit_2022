@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:nda_18dh110793/models/product.dart';
 
+import '../../../constants/colors.dart';
 import '../../../models/category.dart';
 
 class FavoriteFragment extends StatefulWidget {
@@ -16,12 +17,23 @@ class FavoriteFragment extends StatefulWidget {
 class _FavoriteFragmentState extends State<FavoriteFragment> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: widget.favorites.sublist(0, 2).length,
-      itemBuilder: (context, index) => FavoriteItem(
-        favorite: widget.favorites[index],
-      ),
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          elevation: 0,
+          backgroundColor: MyColors.PRIMARY_COLOR,
+          title: Text("Favorite"),
+          leading: Container(),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => FavoriteItem(
+              favorite: widget.favorites[index],
+            ),
+            childCount: widget.favorites.sublist(0, 2).length,
+          ),
+        )
+      ],
     );
   }
 }
