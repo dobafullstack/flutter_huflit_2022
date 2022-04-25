@@ -6,10 +6,6 @@ import '../../constants/colors.dart';
 import '../../models/product.dart';
 
 class CartPage extends StatefulWidget {
-  final List<Product> cart = Cart.init();
-
-  CartPage({Key? key}) : super(key: key);
-
   @override
   State<CartPage> createState() => _CartPageState();
 }
@@ -17,31 +13,51 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
-      appBar: Navbar(context),
-      body: SizedBox(
-        height: size.height,
-        width: size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index) =>
-                    CartItem(product: widget.cart[index]),
-                separatorBuilder: (context, index) => Divider(),
-                itemCount: widget.cart.length),
-            
-          ],
-        ),
-      ),
+      body: StreamBuilder(
+          initialData: cart.cart,
+          stream: cart.cartStream,
+          builder: (context, snapShot) {
+            if (snapShot.hasData) {
+              var data = snapShot.data as List<Map<String, dynamic>>;
+
+              return CustomScrollView(
+                slivers: [
+                  Navbar(context),
+                  data.isEmpty
+                      ? SliverFillRemaining(
+                          child: Center(
+                              child: Text(
+                            "Cart is null",
+                            style: TextStyle(fontSize: 20),
+                          )),
+                        )
+                      : SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: CartItem(
+                                product: data[index]["product"],
+                                amount: data[index]["amount"],
+                              ),
+                            );
+                          },
+                              childCount:
+                                  (snapShot.data as List<Map<String, dynamic>>)
+                                      .length),
+                        ),
+                ],
+              );
+            } else {
+              return CircularProgressIndicator();
+            }
+          }),
     );
   }
 
-  AppBar Navbar(BuildContext context) {
-    return AppBar(
+  SliverAppBar Navbar(BuildContext context) {
+    return SliverAppBar(
       elevation: 0,
       backgroundColor: MyColors.PRIMARY_COLOR,
       title: Text("Cart Details"),

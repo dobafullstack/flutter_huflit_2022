@@ -1,24 +1,45 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:nda_18dh110793/models/product.dart';
 
 class Cart {
-  static List<Product> cart = [];
+  List<Map<String, dynamic>> cart = [];
+  StreamController cartController =
+      StreamController<List<Map<String, dynamic>>>.broadcast();
+  Stream get cartStream => cartController.stream;
 
-  void addProductToCart(Product product) {
-    cart.add(product);
+  void addProductToCart(Product product, int amount) {
+    int existingProduct = findIndex(product);
+
+    if (existingProduct >= 0) {
+      cart[existingProduct]["amount"] += amount;
+    } else {
+      Map<String, dynamic> data = {"product": product, "amount": amount};
+
+      cart.add(data);
+    }
+
+    cartController.sink.add(cart);
   }
 
-  List<Product> getCart() {
-    return cart;
+  void removeFromCart(Product product) {
+    cart =
+        cart.where((element) => element["product"].id != product.id).toList();
+
+    cartController.sink.add(cart);
   }
 
-  static List<Product> init() {
-    List<Product> cart = [];
-    List<Product> products = Product.init();
+  int findIndex(Product product) {
+    int existingProduct =
+        cart.indexWhere((element) => element["product"].id == product.id);
 
-    products.sublist(0, 2).forEach((element) {
-      cart.add(element);
-    });
+    return existingProduct;
+  }
 
-    return cart;
+  void dispose() {
+    cartController.close();
   }
 }
+
+Cart cart = Cart();

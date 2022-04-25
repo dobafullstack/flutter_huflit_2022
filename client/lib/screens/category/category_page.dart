@@ -39,17 +39,52 @@ class CategoryPage extends StatelessWidget {
                     ))),
           ),
           SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                    (context, index) => ProductItem(product: products[index]),
-                    childCount: products.length),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.65,
-                    crossAxisSpacing: 10)),
-          ),
+            padding: EdgeInsets.only(left: 16, right: 16, bottom: 32),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return InkWell(
+                  onTap: () => Navigator.pushNamed(context, "/product-detail",
+                      arguments: products[index]),
+                  child: SizedBox(
+                    height: 100,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          products[index].image,
+                          width: 100,
+                          height: 100,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              products[index].title,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 250,
+                              child: Text(
+                                products[index].description,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }, childCount: products.length),
+            ),
+          )
         ],
       ),
     );

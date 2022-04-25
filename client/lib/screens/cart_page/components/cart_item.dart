@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:nda_18dh110793/models/cart.dart';
 
 import '../../../models/product.dart';
 
 class CartItem extends StatelessWidget {
   Product product;
+  int amount;
 
-  CartItem({required this.product});
+  CartItem({required this.product, required this.amount});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       height: 120,
-      decoration: BoxDecoration(color: Colors.grey[200]),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -23,8 +27,13 @@ class CartItem extends StatelessWidget {
               Text(product.title)
             ],
           ),
-          Text(product.price.toString()),
-          Icon(Icons.delete)
+          Text("x${amount.toString()}"),
+          Text("${product.price}"),
+          GestureDetector(
+              onTap: () {
+                cart.removeFromCart(product);
+              },
+              child: Icon(Icons.delete))
         ],
       ),
     );
