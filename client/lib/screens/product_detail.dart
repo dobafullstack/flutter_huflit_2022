@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nda_18dh110793/models/favourite.dart';
 import 'package:nda_18dh110793/models/product.dart';
 
 import '../constants/colors.dart';
 import '../models/cart.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  ProductDetailPage();
+  const ProductDetailPage();
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -27,7 +28,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final product = ModalRoute.of(context)!.settings.arguments as Product;
 
     return Scaffold(
-      appBar: Navbar(context, product.title),
+      appBar: Navbar(context, product),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,11 +124,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  AppBar Navbar(BuildContext context, String title) {
+  AppBar Navbar(BuildContext context, Product product) {
     return AppBar(
       elevation: 0,
       backgroundColor: MyColors.PRIMARY_COLOR,
-      title: Text(title),
+      title: Text(product.title),
+      actions: [
+        GestureDetector(
+            onTap: () {
+              favorite.addToFavorite(product);
+              setState(() {});
+            },
+            child: Icon(
+              Icons.favorite,
+              color:
+                  favorite.checkInFavorite(product) ? Colors.red : Colors.white,
+            )),
+        Padding(padding: EdgeInsets.only(right: 16))
+      ],
     );
   }
 }

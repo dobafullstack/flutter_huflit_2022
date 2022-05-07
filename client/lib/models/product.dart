@@ -65,7 +65,7 @@ class Product {
           image: "assets/foods/ic_black_coffee.png",
           price: 8.0),
       Product(
-          id: 1,
+          id: 7,
           category_id: 1,
           title: "Bread",
           description:
@@ -73,7 +73,7 @@ class Product {
           image: "assets/foods/ic_black_coffee.png",
           price: 8.0),
       Product(
-          id: 2,
+          id: 8,
           category_id: 4,
           title: "Coffee",
           description:
@@ -81,7 +81,7 @@ class Product {
           image: "assets/foods/ic_black_coffee.png",
           price: 8.0),
       Product(
-          id: 3,
+          id: 9,
           category_id: 1,
           title: "Tea",
           description:
@@ -89,7 +89,7 @@ class Product {
           image: "assets/foods/ic_black_coffee.png",
           price: 8.0),
       Product(
-          id: 4,
+          id: 10,
           category_id: 1,
           title: "Bread",
           description:
@@ -97,7 +97,7 @@ class Product {
           image: "assets/foods/ic_black_coffee.png",
           price: 8.0),
       Product(
-          id: 5,
+          id: 11,
           category_id: 1,
           title: "Coffee",
           description:
@@ -105,7 +105,7 @@ class Product {
           image: "assets/foods/ic_black_coffee.png",
           price: 8.0),
       Product(
-          id: 6,
+          id: 12,
           category_id: 1,
           title: "milk & Tea",
           description:

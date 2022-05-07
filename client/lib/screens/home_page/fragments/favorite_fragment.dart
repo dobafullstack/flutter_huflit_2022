@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:nda_18dh110793/models/favourite.dart';
 import 'package:nda_18dh110793/models/product.dart';
 
 import '../../../constants/colors.dart';
-import '../../../models/category.dart';
 
 class FavoriteFragment extends StatefulWidget {
-  final List<Product> favorites = Product.init();
-
-  FavoriteFragment({Key? key}) : super(key: key);
+  const FavoriteFragment({Key? key}) : super(key: key);
 
   @override
   State<FavoriteFragment> createState() => _FavoriteFragmentState();
@@ -25,14 +22,24 @@ class _FavoriteFragmentState extends State<FavoriteFragment> {
           title: Text("Favorite"),
           leading: Container(),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => FavoriteItem(
-              favorite: widget.favorites[index],
-            ),
-            childCount: widget.favorites.sublist(0, 2).length,
-          ),
-        )
+        StreamBuilder(
+            initialData: favorite.favorites,
+            stream: favorite.favoriteStream,
+            builder: (context, snapShot) {
+              if (snapShot.data != null) {
+                final favorites = snapShot.data as List<Product>;
+
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => FavoriteItem(
+                      favorite: favorites[index],
+                    ),
+                    childCount: favorites.length,
+                  ),
+                );
+              }
+              return Container();
+            })
       ],
     );
   }
