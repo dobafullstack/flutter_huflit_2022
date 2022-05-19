@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:nda_18dh110793/screens/cart_page/cart.dart';
 
 import '../../../widgets/Input.dart';
 
-class HomeHeader extends StatefulWidget {
-  HomeHeader({Key? key}) : super(key: key);
+class HomeHeader extends StatelessWidget {
+  final TextEditingController _controller = TextEditingController();
+  Function(String) onSearch;
 
-  @override
-  State<HomeHeader> createState() => _HomeHeaderState();
-}
+  HomeHeader({required this.onSearch});
 
-class _HomeHeaderState extends State<HomeHeader> {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: Input(
+            // controller: _controller,
             hintText: "Search product",
             prefixIcon: Icons.search,
+            onChange: onSearch,
           ),
         ),
         Padding(padding: EdgeInsets.symmetric(horizontal: 8)),

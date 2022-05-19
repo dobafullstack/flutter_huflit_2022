@@ -26,9 +26,20 @@ class _FavoriteFragmentState extends State<FavoriteFragment> {
             initialData: favorite.favorites,
             stream: favorite.favoriteStream,
             builder: (context, snapShot) {
-              if (snapShot.data != null) {
-                final favorites = snapShot.data as List<Product>;
+              final favorites = snapShot.data as List<Product>;
 
+              if (!snapShot.hasData || favorites.isEmpty) {
+                return SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      "Favorite is null",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                );
+              } else {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) => FavoriteItem(
@@ -38,7 +49,6 @@ class _FavoriteFragmentState extends State<FavoriteFragment> {
                   ),
                 );
               }
-              return Container();
             })
       ],
     );

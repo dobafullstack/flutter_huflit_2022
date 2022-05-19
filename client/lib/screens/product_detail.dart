@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nda_18dh110793/helpers/cart.dart';
 import 'package:nda_18dh110793/models/favourite.dart';
 import 'package:nda_18dh110793/models/product.dart';
 
@@ -73,14 +74,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       margin: EdgeInsets.only(left: 10),
                       child: ElevatedButton(
                           onPressed: () {
-                            if (cart.findIndex(product) >= 0) {
-                              showDialog<String>(
+                            if (cartStream.findIndex(product) >= 0) {
+                              showDialog(
                                 context: context,
                                 builder: (BuildContext context) =>
                                     Popup(context),
                               );
                             } else {
-                              cart.addProductToCart(product, amount);
+                              cartStream.addProductToCart(product, amount);
                             }
                           },
                           child: Text("Add to cart"))),
@@ -131,15 +132,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       title: Text(product.title),
       actions: [
         GestureDetector(
-            onTap: () {
-              favorite.addToFavorite(product);
-              setState(() {});
-            },
-            child: Icon(
-              Icons.favorite,
-              color:
-                  favorite.checkInFavorite(product) ? Colors.red : Colors.white,
-            )),
+          onTap: () {
+            favorite.addToFavorite(product);
+            setState(() {});
+          },
+          child: Icon(
+            Icons.favorite,
+            color:
+                favorite.checkInFavorite(product) ? Colors.red : Colors.white,
+          ),
+        ),
         Padding(padding: EdgeInsets.only(right: 16))
       ],
     );

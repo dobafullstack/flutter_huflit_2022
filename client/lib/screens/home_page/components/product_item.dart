@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nda_18dh110793/screens/product_detail.dart';
 
 import '../../../models/product.dart';
 
@@ -17,7 +16,7 @@ class ProductItem extends StatelessWidget {
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Image(
               image: AssetImage(

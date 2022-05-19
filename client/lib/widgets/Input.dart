@@ -9,16 +9,19 @@ class Input extends StatefulWidget {
   bool readyOnly;
   TextInputType type;
   String? Function(String?)? validator;
+  Function(String)? onChange;
 
-  Input(
-      {this.hintText,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.validator,
-      this.controller,
-      this.readyOnly = false,
-      this.password = false,
-      this.type = TextInputType.text});
+  Input({
+    this.hintText,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.validator,
+    this.controller,
+    this.readyOnly = false,
+    this.password = false,
+    this.onChange,
+    this.type = TextInputType.text,
+  });
 
   @override
   State<Input> createState() => _InputState();
@@ -33,12 +36,14 @@ class _InputState extends State<Input> {
       controller: widget.controller,
       readOnly: widget.readyOnly,
       keyboardType: widget.type,
+      onChanged: widget.onChange,
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 25),
-          hintText: widget.hintText,
-          border: OutlineInputBorder(),
-          prefixIcon: Icon(widget.prefixIcon),
-          suffixIcon: Icon(widget.suffixIcon)),
+        contentPadding: EdgeInsets.symmetric(vertical: 25),
+        hintText: widget.hintText,
+        border: OutlineInputBorder(),
+        prefixIcon: Icon(widget.prefixIcon),
+        suffixIcon: Icon(widget.suffixIcon),
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nda_18dh110793/models/cart.dart';
+import 'package:nda_18dh110793/helpers/cart.dart';
 
 import '../../../models/product.dart';
 
@@ -31,7 +31,7 @@ class CartItem extends StatelessWidget {
           Text("${product.price}"),
           GestureDetector(
               onTap: () {
-                cart.removeFromCart(product);
+                cartStream.removeFromCart(product);
               },
               child: Icon(Icons.delete))
         ],

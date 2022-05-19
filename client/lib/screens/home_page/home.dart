@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/rendering/box.dart';
 import 'package:nda_18dh110793/constants/colors.dart';
 import 'package:nda_18dh110793/models/bottom_navigation.dart';
-import 'package:nda_18dh110793/screens/home_page/components/home_header.dart';
 import 'package:nda_18dh110793/screens/home_page/fragments/account_fragment.dart';
 import 'package:nda_18dh110793/screens/home_page/fragments/favorite_fragment.dart';
 import 'package:nda_18dh110793/screens/home_page/fragments/home_fragment.dart';
 import 'package:nda_18dh110793/screens/home_page/fragments/notification_fragment.dart';
 
-import '../../widgets/Input.dart';
-
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -38,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: fragments[_selectedTab],
+      backgroundColor: Colors.grey[100],
       bottomNavigationBar: BottomNavBar(),
     );
   }
